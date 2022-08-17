@@ -14,20 +14,13 @@ while True:
     try:
         results = redis.xreadgroup(group, key, {key: '>'}, None)
 
-        if results != []:
+        if results:
             print(results)
             for result in results:
                 obj = result[1][0][1]
                 order = Order.get(obj['pk'])
                 order.status = 'refunded'
                 order.save()
-                #
-                # if order:
-                #     print(order)
-                #     product.quantity = product.quantity - int(obj['quantity'])
-                #     product.save()
-                # else:
-                #     redis.xadd('refund_order', obj, '*')
     except Exception as e:
         print(str(e))
     time.sleep(1)

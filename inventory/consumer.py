@@ -23,13 +23,6 @@ while True:
                     product.save()
                 except:
                     redis.xadd('refund_order', obj, '*')
-
-                # if product:
-                #     print(product)
-                #     product.quantity = product.quantity - int(obj['quantity'])
-                #     product.save()
-                # else:
-                #     redis.xadd('refund_order', obj, '*')
     except Exception as e:
         print(str(e))
     time.sleep(1)
